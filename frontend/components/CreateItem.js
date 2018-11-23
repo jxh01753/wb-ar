@@ -36,7 +36,6 @@ class CreateItem extends Component {
   };
 
   uploadFile = async (e) => {
-    console.log('uploading file');
     const files = e.target.files;
     const data = new FormData();
     data.append('file', files[0]);
@@ -69,7 +68,10 @@ class CreateItem extends Component {
             onSubmit={async (e) => {
               e.preventDefault();
               const res = await createItem();
-              Router.push({ pathname: '/item', query: res.data.createItem.id });
+              Router.push({
+                pathname: '/item',
+                query: { id: res.data.createItem.id }
+              });
             }}
           >
             <Error error={error} disabled={loading} aria-busy={loading} />
